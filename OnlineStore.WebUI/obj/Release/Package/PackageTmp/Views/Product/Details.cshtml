@@ -1,0 +1,14 @@
+﻿@model OnlineStore.WebUI.Models.ProductsListViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="features_items">
+    <!--features_items-->
+    <h2 class="title text-center">Detalhes do Produtos</h2>
+
+    @Html.Partial("PruductDetails", Model.Products.FirstOrDefault())
+</div>
+

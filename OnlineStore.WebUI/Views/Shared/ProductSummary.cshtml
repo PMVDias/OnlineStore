@@ -1,0 +1,67 @@
+﻿@model OnlineStore.Domain.Entities.Product
+
+<div class="col-sm-4">
+    <div class="product-image-wrapper">
+        <div class="single-products">
+            <div class="productinfo text-center">
+                @if (Model.ImageData != null)
+                {
+                    <div class="pull-left" style="margin-right: 10px">
+                        <img class="img-thumbnail" width="75" height="75"
+                             src="@Url.Action("GetImage", "Product", new { Model.ProductID })" />
+                    </div>
+                }
+                else
+                {
+                    <div class="pull-left" style="margin-right: 10px">
+                        <img class="img-thumbnail" width="75" height="75" src="~/Content/images/404/404.png" />
+                    </div>
+                }
+                <h2>@Model.Price.ToString("c")</h2>
+                <p><strong>@Model.Name</strong></p>
+                @if (Model.Description.Length > 70)
+                {
+                    <p>@Model.Description.Substring(0, 70)...</p>
+                }
+                else
+                {
+                    <p>@Model.Description</p>
+                }
+                <p>
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        <div>
+                            @Html.HiddenFor(x => x.ProductID)
+                            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-shopping-cart"></i>
+                                Add to cart
+                            </button>
+
+                        </div>
+                    }
+                </p>
+                <p><a href="@Url.Action("Details", "Product", new { id = Model.ProductID })" class="btn btn-default add-to-cart"><i class="fa fa-info"></i>Product Details</a></p>
+            </div>
+            @*<div class="product-overlay">
+                    <div class="overlay-content">
+                        <h2>@Model.Price.ToString("c")</h2>
+                        <p><strong>@Model.Name</strong></p>
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            <div>
+                                @Html.HiddenFor(x => x.ProductID)
+                                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Add to cart
+                                </button>
+
+                            </div>
+                        }
+                        <a href="@Url.Action("Details", "Product", new { id = Model.ProductID })" class="btn btn-default add-to-cart"><i class="fa fa-info"></i>Add to cart</a>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
